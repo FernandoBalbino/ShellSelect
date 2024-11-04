@@ -46,7 +46,7 @@ export default function addCodigo(){
           <button className="my-4 buttonS">Adicionar código de barra</button>
       </div>
           <div className="w-full flex justify-center items-center h-full">
-            <PDFViewer className="max-w-fit w-[406px] aspect-square h-[92.333333%]" showToolbar={false} >
+            <PDFViewer className="max-w-fit  w-[406px] aspect-square h-[92.333333%]" showToolbar={false} >
             <PdpViewer  />
             </PDFViewer>
             
