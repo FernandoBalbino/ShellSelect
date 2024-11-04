@@ -5,7 +5,7 @@ import PdpViewer from "./pdfViewer";
 import { PDFViewer } from "@react-pdf/renderer";
 import { MdBarcodeReader } from "react-icons/md";
 import { useState } from "react";
-export default function addCodigo(){
+export default function AddCodigo(){
   const [selecionado, setSelecionado] = useState('0');
   return(
     <>
