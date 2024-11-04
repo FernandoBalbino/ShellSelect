@@ -1,0 +1,95 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+  --amarelo-claro: #FBE7A0;
+  --amarelo-medio: #F8E71C;
+  --amarelo-escuro: #F5C300;
+  --amarelo-mais-escuro: #F0A500;
+  --amarelo-muito-escuro: #D4A400;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+
+/*  #1E1F21 preto #DEE2E6 */
+*{
+  margin: 0;
+  padding: 0;
+}
+body{
+  background: white;
+  
+}
+.animated-background {
+  background-size: 200%;
+  
+  -webkit-animation: gradient-animation 6s ease infinite;
+  -moz-animation: gradient-animation 6s ease infinite;
+  animation: gradient-animation 6s ease infinite;
+}
+.path{
+  clip-path: ellipse(100% 10% at 50% 100%);
+}
+@keyframes gradient-animation {
+  0% {
+    background-position: 100%;
+}
+
+100% {
+    background-position: -100% 0%;
+}
+}
+
+.buttonS {
+  background: linear-gradient(90deg,  #FF0000,#FFCC00);
+    background-size: 200%;
+    color: white;
+    border: none;
+    border-radius: 9999px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-position 0.5s ease;
+}
+.buttonS2 {
+  background: linear-gradient(90deg,  #FF0000,#cd0404);
+    background-size: 200%;
+    color: white;
+    border: none;
+    border-radius: 9999px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-position 0.5s ease;
+}
+.selectedCat{
+  background-color: #FBCE07;
+  color: white;
+}
+.buttonS:hover {
+  background-position: right;
+}
+
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+#title{
+  color:#222529;
+  line-height: 76px;
+  font-weight: 700;
+}
