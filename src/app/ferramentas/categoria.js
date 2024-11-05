@@ -48,4 +48,4 @@ function Categoria() {
     );
 }
 
-export default React.memo(Categoria);
+export default Categoria;

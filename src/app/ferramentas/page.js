@@ -1,14 +1,15 @@
-
+import { Suspense } from 'react';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { data } from './data';
 import Categoria from './categoria';
 import Loading from './gerador-codigo-de-barras/loading';
+import ToolsLoading from './loadingstart';
 import Image from 'next/image';
 import * as motion from "framer-motion/client"
 
 
-export default function Ferramentas({ searchParams }) {
+export default async function Ferramentas({ searchParams }) {
     let activeCategory =  searchParams.categoria != null? searchParams.categoria: 'Populares';
     const Card = dynamic(() => import('./card'), {
         ssr: false,
@@ -27,6 +28,9 @@ export default function Ferramentas({ searchParams }) {
     
     return (
         <>
+        <Suspense fallback={<ToolsLoading />}>
+
+        
             <section className="max-w-[90rem] mt-10 relative mx-auto">
                 <div>
                     <h2 id="title" className="text-center text-6xl">Ferramentas de uso rápido</h2>
@@ -69,6 +73,7 @@ export default function Ferramentas({ searchParams }) {
                 
                 
             </section>
+            </Suspense>
         </>
     );
 }
