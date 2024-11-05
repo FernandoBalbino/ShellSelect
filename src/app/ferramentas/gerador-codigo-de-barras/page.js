@@ -9,6 +9,7 @@ const AdicionarCodigo = dynamic(() => import('./adicionarCodigo'), {
     loading: () => <Loading />,
     
   });
+  
 export default function geradorDeCodigoDeBarra(){
     return(
         <>

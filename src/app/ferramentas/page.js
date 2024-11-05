@@ -1,15 +1,20 @@
 
+import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { data } from './data';
 import Categoria from './categoria';
-
+import Loading from './gerador-codigo-de-barras/loading';
 import Image from 'next/image';
 import * as motion from "framer-motion/client"
 
+
 export default function Ferramentas({ searchParams }) {
     let activeCategory =  searchParams.categoria != null? searchParams.categoria: 'Populares';
-    
-    
+    const Card = dynamic(() => import('./card'), {
+        ssr: false,
+        loading: () => <Loading />,  // Adiciona um fallback de carregamento enquanto Card é carregado
+    });
+   
     let dados = data;
 
     // Filtragem de cards: se a categoria for "Populares", exibe todos os cards.
@@ -34,33 +39,11 @@ export default function Ferramentas({ searchParams }) {
             
                 {categoriaExistente  ?(
                     <div className='grid max-w-7xl mx-auto grid-cols-2 gap-y-6 gap-x-6 xl:grid-cols-4 justify-center justify-items-center items-center content-center center  p-9 '>
-                       {filteredCards.map((item) => (
-                        
-                        <Link href={item.url} key={item.id} className='w-[18rem]  py-3 transition-all hover:-translate-y-2 hover: h-full 
-                        ' >
-                            <motion.div
-                            initial={{ opacity:0, y:60}}
-                            animate={{opacity:1, y:0}}
-                            transition={{duration: 0.6}}
-                            className='rounded-xl  flex flex-col overflow-hidden h-[270px] max-w-[18rem] max-h-[300px]'>
-                            <Image
-                                priority
-                                className='w-[564px] rounded-xl h-auto'
-                                width={564}
-                                height={376}
-                                alt='logo'
-                                src={item.image}
-                             />
-                            <h2 className='mt-3 font-bold text-[14px] text-[#222529]'>{item.nome}</h2>
-                            <p className='mt-1 text-[12px] text-[#4c535c] line-clamp-3'>{item.descricao}</p>  
-                            </motion.div>
-                             
-                        </Link> 
-                    
-                    
-                )
-                
-            )}
+                     
+                     
+                     <Card item={filteredCards} />
+                     
+                      
                     </div>
                      
                 )
