@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { data } from './data';
 import Categoria from './categoria';
-import Loading from './gerador-codigo-de-barras/loading';
+import CardsLoadingSkeleton from './loadingCards';
 import ToolsLoading from './loadingstart';
 import Image from 'next/image';
 import * as motion from "framer-motion/client"
@@ -13,11 +13,11 @@ export default async function Ferramentas({ searchParams }) {
     let activeCategory =  searchParams.categoria != null? searchParams.categoria: 'Populares';
     const Card = dynamic(() => import('./card'), {
         ssr: false,
-        loading: () => <Loading />,  // Adiciona um fallback de carregamento enquanto Card é carregado
+        loading: () => <CardsLoadingSkeleton />,  // Adiciona um fallback de carregamento enquanto Card é carregado
     });
    
     let dados = data;
-
+    
     // Filtragem de cards: se a categoria for "Populares", exibe todos os cards.
     const filteredCards = activeCategory === 'Populares'
         ? dados
