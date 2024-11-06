@@ -6,7 +6,7 @@ import Categoria from './categoria';
 import CardsLoadingSkeleton from './loadingCards';
 import ToolsLoading from './loadingstart';
 import Image from 'next/image';
-import * as motion from "framer-motion/client"
+
 
 
 export default async function Ferramentas({ searchParams }) {

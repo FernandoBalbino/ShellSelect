@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { useRouter, usePathname, useSearchParams } from 'next/navigation';
 
 const categories = [
@@ -14,12 +14,17 @@ const categories = [
 export default function Categoria() {
     const searchParams = useSearchParams();
     const pathname = usePathname();
-    const { replace } = useRouter();
+    const router = useRouter();
 
+    // Determina a categoria ativa com memoização para evitar cálculos repetitivos
     const categoriaAtual = searchParams.get('categoria');
-    const actived = categories.find(cat => cat.value === categoriaAtual)?.id || 1;
+    const actived = useMemo(
+        () => categories.find(cat => cat.value === categoriaAtual)?.id || 1,
+        [categoriaAtual]
+    );
 
-    function handleClick(id, categoria) {
+    // Callback memoizado para atualizar a URL sem recarregar
+    const handleClick = useCallback((categoria) => {
         const params = new URLSearchParams(searchParams);
         
         if (categoria) {
@@ -28,24 +33,27 @@ export default function Categoria() {
             params.delete('categoria');
         }
 
-        replace(`${pathname}?${params.toString()}`);
-    }
+        router.replace(`${pathname}?${params.toString()}`, { scroll: false });
+    }, [pathname, router, searchParams]);
 
     return (
         <div className="flex justify-center transition-colors gap-2 flex-wrap mt-14">
-            {categories.map(category => (
-                <div
-                    key={category.id}
-                    onClick={() => handleClick(category.id, category.value)}
-                    className={`bg-[#f1f2f4] flex items-center justify-center ${
-                        actived === category.id ? 'selectedCat' : ''
-                    } h-[40px] py-[6px] px-[16px] text-[16px] font-normal text-[#222529] text-center whitespace-nowrap cursor-pointer rounded-lg ${
-                        actived === category.id ? 'hover:bg-[#fbce07b5]' : 'hover:bg-[#E8EAEC]'
-                    }`}
-                >
-                    {category.label}
-                </div>
-            ))}
+            {categories.map(category => {
+                // Calcula classes condicionalmente para evitar cálculos desnecessários
+                const isActive = actived === category.id;
+                const activeClass = isActive ? 'selectedCat' : '';
+                const hoverClass = isActive ? 'hover:bg-[#fbce07b5]' : 'hover:bg-[#E8EAEC]';
+
+                return (
+                    <div
+                        key={category.id}
+                        onClick={() => handleClick(category.value)}
+                        className={`bg-[#f1f2f4] flex items-center justify-center ${activeClass} h-[40px] py-[6px] px-[16px] text-[16px] font-normal text-[#222529] text-center whitespace-nowrap cursor-pointer rounded-lg ${hoverClass}`}
+                    >
+                        {category.label}
+                    </div>
+                );
+            })}
         </div>
     );
 }
