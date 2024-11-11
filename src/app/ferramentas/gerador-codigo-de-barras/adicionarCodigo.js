@@ -1,16 +1,55 @@
 'use client'
+import PdfViewer from "./pdfViewer";
 import { LiaBarcodeSolid } from "react-icons/lia";
 import { FaCircleCheck } from "react-icons/fa6";
-import PdpViewer from "./pdfViewer";
-import { PDFViewer } from "@react-pdf/renderer";
 import { MdBarcodeReader } from "react-icons/md";
-import { useState } from "react";
+import { PiWarningCircleFill } from "react-icons/pi";
+import GerarBarra from "./codigoSvg";
+
+
+
+import { useState, useRef } from "react";
+
 export default function AddCodigo(){
+  const [codigos, setCodigos] = useState([])
+  const myRef1 = useRef(null)
+  const myRef2 = useRef(null)
+  const [barcodeSrc, setBarcodeSrc] = useState(null);
   const [selecionado, setSelecionado] = useState('0');
+  const [nome, setNome] = useState('')
+  const [codigo, setCodigo] = useState('')
+  const [validacao, setValidacao] = useState(false)
+  const [idCounter, setCounter] = useState(0)
+  
+  function adicionarDados(e){
+    
+    if(nome == '' || codigo == ''){
+      setValidacao(true)
+      if(myRef1.current.value.length == 0){
+        myRef1.current.focus();
+      }else if(myRef2.current.value.length == 0){
+        myRef2.current.focus();
+      }else{
+        myRef1.current.focus()
+      }
+      return;
+    }else{
+      setCounter(idCounter+ 1)
+      codigos.unshift({id:idCounter,nome:nome,codigo:codigo, url:barcodeSrc})
+      setNome('');
+      setCodigo('')
+      setValidacao(false)
+    }
+    
+    
+  }
+
+  console.log(barcodeSrc)
   return(
     <>
-      
-      <div className="flex flex-col  items-start  p-7 gap-x-5  h-full w-full">
+      <GerarBarra  codigo="1234567890" onGenerate={setBarcodeSrc} />
+      <div  className="flex flex-col  items-start  p-7 gap-x-5  h-full w-full">
+        
         <div>
           <h2 className="text-[#343537] text-2xl font-semibold mb-1">Sobre o seu produto:</h2>
           <p className="mb-4 text-[#7f8792]">Escolha o tipo de código do seu produto abaixo:</p>
@@ -37,18 +76,39 @@ export default function AddCodigo(){
           </div>
           
         </div>
-        <div className="flex flex-col w-full">
+        <div className="flex w-full relative ">
+          <div>
             <label htmlFor="nomeCodigo" className="text-[#343537] w-fit  cursor-pointer text-lg font-semibold my-2">Nome do produto</label>
-            <input placeholder="Produto..." className="outline-[#E7E8E9] focus:border-[#171E43] w-[340px] block outline-0 border-2 px-3 py-2 rounded-md" id="nomeCodigo" type="text" />
+            <input placeholder="Produto..." ref={myRef1} autoFocus={true}  value={nome}  onChange={(e) => setNome(e.target.value)} className={`outline-[#E7E8E9] ${validacao && myRef1.current.value==''?'border-red-500 translate-x-3 ':''}  focus:border-[#171E43] w-[340px] block outline-0 transition-all border-2 px-3 py-2 rounded-md `} id="nomeCodigo" type="text" />
             <label htmlFor="numeroCodigo" className="text-[#343537]  w-fit cursor-pointer text-lg font-semibold my-2">Número do código de barras</label>
-            <input placeholder="859AAA498" className="outline-[#E7E8E9] focus:border-[#171E43] w-[310px] block outline-0 border-2 px-3 py-2 rounded-md" id="numeroCodigo" type="text" />
+            <input placeholder="859AAA498" ref={myRef2}  value={codigo} onChange={(e) => setCodigo(e.target.value)} className={`outline-[#E7E8E9] ${validacao && myRef2.current.value==''?'border-red-500 translate-x-3 ':''} focus:border-[#171E43] w-[310px] block outline-0 border-2 transition-all px-3 py-2 rounded-md`} id="numeroCodigo" type="text" />
+            </div>
+            <div className={`w-full ${validacao?'visible':'hidden'} flex justify-center items-center`}>
+             
+              <div className='flex-col items-center place-items-center justify-center'>
+                <div>
+                  <PiWarningCircleFill color="#DD1D21" className='text-center block animate-bounce' size={50} />
+                  </div>
+                <div className='text-[#343537] text-lg font-semibold '>
+                Preencha os campos!
+                </div>
+              </div>
+            </div>
           </div>
-          <button className="my-4 buttonS">Adicionar código de barra</button>
+        
+         <button 
+            onClick={() => adicionarDados()}
+           className="my-4 buttonS active:translate-y-1 transform-gpu hover:scale-105 duration-700 transition-all">
+          Adicionar código de barra
+          </button>
+          
+       
+          
       </div>
           <div className="w-full flex justify-center items-center h-full">
-            <PDFViewer className="max-w-fit teste w-[406px] aspect-square h-[92.333333%]" showToolbar={false} >
-            <PdpViewer  />
-            </PDFViewer>
+           <PdfViewer date={codigos} />
+           
+           
             
           </div>
     </>

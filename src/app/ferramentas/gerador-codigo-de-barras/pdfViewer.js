@@ -1,43 +1,88 @@
+'use client'
+import { useState } from "react";
+import { CiBarcode } from "react-icons/ci";
+import * as motion from "framer-motion/client";
+import { FaFilePdf } from "react-icons/fa6";
 
-import { Page, Text, View, Document, StyleSheet  } from '@react-pdf/renderer';
+import DownloadPDFButton from "./buttonDownload";
+import Image from "next/image";
 
-const styles = StyleSheet.create({
-    page: {
+export default function PdfViewer({ date }) {
+  const [removedIds, setRemovedIds] = useState([]);
+  const componentKey = JSON.stringify(date);
+  const dados = date.filter(item => !removedIds.includes(item.id));
+  const control = dados.length >= 6 ? 'overflow-auto' : 'overflow-hidden';
+  let teste = 'Fernando'
+  // Variantes para controlar a entrada e saída de cada item individualmente
+  const variants = {
+    hidden: { y: 100, opacity: 0 }, // Posição inicial
+    visible: { y: 0, opacity: 1 },  // Posição final
+    exit: { opacity: 0, y: -100 }   // Animação de saída, opcional
+  };
+
+  function deletarItem(id) {
+    setRemovedIds(prev => [...prev, id]);
+  }
+
+  return (
+    <>
+
+    <div key={componentKey} onClick={() => console.log(dados)} className={`shadow-xl  gap-2 ${control} flex flex-col p-8 max-h-[90%] rounded-xl w-11/12`}>
+    <div className={`${dados.length==0?'hidden':'visible'}`}>
+      <DownloadPDFButton dados={dados} />
+    </div>
+      
+      {dados.length === 0 ? (
+        <div className='flex-col justify-center content-center items-center w-full'>
+          <h2 className='text-[#222529] mb-4 text-center font-semibold text-4xl'>Nenhum produto adicionado.</h2>
+          <Image 
+            priority
+            className="w-10/12 mx-auto h-auto"
+            width={300}
+            height={300}
+            alt='Nenhum produto'
+            src='/imagens/noCard.svg'
+          />
+        </div>
+      ) : (
+        dados.map((item) => (
+          <div className="flex-col h-full group relative  w-full" key={item.id}>
+            
+            <motion.div
+              layout // Adiciona o layout do Framer Motion para entrada suave
+              initial="hidden" // Animação ao adicionar
+              animate="visible"
+              exit="exit" // Animação de saída ao deletar
+              variants={variants}
+              transition={{ duration: 0.3 }}
+              className="flex items-center justify-between cursor-pointer px-3 rounded-lg hover:bg-[#E5E7EB] gap-2 h-auto w-full"
+            >
+              <div className="flex justify-center items-center gap-2">
+                <div className="rounded-full p-2">
+                  <CiBarcode color="black" size={50} />
+                </div>
+                <div>{item.nome}</div>
+              </div>
+              <div
+                onClick={() => deletarItem(item.id)}
+                className="absolute invisible group-hover:visible top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-md p-3 text-white"
+              >
+                Deletar item
+              </div>
+              <div className="font-bold text-[20px]">{item.codigo}</div>
+            </motion.div>
+          </div>
+        )
+        
+      )
+     
+      )
+      
+      }
+      
+           
+    </div>
     
-      backgroundColor: 'white',
-      overflow:'hidden',
-      
-      
-    },
-    section: {
-      margin: 10,
-      padding: 10,
-     
-      overflow:'hidden'
-    }
-
-  });
-
-export default function pdpViewer(){
-    return(
-        <>
-        <Document style={{}}>
-    <Page size="A4"   style={styles.page}>
-      
-      <View style={styles.section}>
-        <Text>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi non fermentum enim. Maecenas vel lectus nec sem porttitor pulvinar. Nunc lorem ante, volutpat at interdum ut, vestibulum in nisi. Morbi cursus diam in viverra mollis. Nam eu ante pulvinar enim finibus suscipit. Mauris tempor vestibulum egestas. Integer vel dolor justo. Suspendisse bibendum et ante at aliquet. Donec felis enim, feugiat non mi quis, pulvinar vulputate turpis.
-
-Integer tristique nisi at imperdiet venenatis. Donec enim neque, consectetur ac laoreet sit amet, interdum et diam. Sed cursus in tortor non cursus. Praesent gravida, tortor id bibendum ultricies, ipsum risus suscipit leo, sodales convallis massa risus at tellus. Nunc ac tincidunt lorem. Sed viverra maximus leo non semper. Nunc iaculis ac tellus vitae iaculis. Morbi turpis ipsum, pellentesque eu elementum a, semper id sem. Sed turpis nibh, hendrerit eu nulla nec, vehicula vestibulum nisi. Suspendisse sit amet sem blandit, rhoncus ligula a, accumsan erat. Nullam placerat sapien est, quis iaculis lorem laoreet eu. Phasellus et vehicula enim.
-
-Aliquam porttitor tristique tortor at fermentum. Nam gravida pulvinar risus, et dignissim felis suscipit id. Praesent nunc lorem, suscipit ut purus vitae, lacinia lacinia arcu. In elementum in augue at posuere. Praesent commodo quis justo nec ullamcorper. Aenean vulputate eu turpis in pellentesque. Proin pretium enim quis facilisis vestibulum. Sed sollicitudin turpis libero, ut vehicula justo commodo ut. Nunc vitae egestas ante, sit amet interdum dui. Suspendisse potenti. Maecenas rhoncus lectus felis, laoreet finibus ante porta sit amet. Suspendisse mattis commodo nunc, a commodo mauris. Praesent eget lobortis nunc, id tempor erat. Praesent eu orci eu nulla aliquet vulputate sit amet in elit. Vestibulum dui eros, mattis eget est et, efficitur ullamcorper nibh.
-
-Vestibulum sit amet augue neque. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce tempor tellus id consectetur iaculis. Duis quis nibh non lectus finibus tempor a sit amet nisi. Morbi vitae nisl eget elit consectetur feugiat non non orci. Mauris eget ipsum quis lacus venenatis ultrices. Sed iaculis ut risus non facilisis. Mauris imperdiet purus a tortor pretium posuere. Integer eu mauris et magna imperdiet faucibus. Vivamus commodo massa dolor, id consequat ligula scelerisque vitae.
-
-Etiam et sem a turpis tempus tempor.  </Text>
-      </View>
-     
-    </Page>
-  </Document>
-        </>
-    )
+    </>
+  );
 }
