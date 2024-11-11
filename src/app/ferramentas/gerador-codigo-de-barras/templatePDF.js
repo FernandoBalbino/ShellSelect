@@ -63,7 +63,7 @@ const MyDocument = ({ dados }) => {
             <View key={item.id} style={styles.itemContainer}>
               <Text style={styles.title}>{item.nome}</Text>
               <Text style={styles.barcode}>{item.codigo}</Text>
-              <Image src={item.url} style={styles.image} />
+              <Image  src={item.url} style={styles.image} />
             </View>
           ))}
         </Page>
