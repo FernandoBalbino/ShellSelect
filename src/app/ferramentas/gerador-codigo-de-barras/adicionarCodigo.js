@@ -44,10 +44,11 @@ export default function AddCodigo(){
     
   }
 
-  console.log(barcodeSrc)
+  
   return(
     <>
-      <GerarBarra  codigo="1234567890" onGenerate={setBarcodeSrc} />
+     {codigo && <GerarBarra codigo={codigo} onGenerate={setBarcodeSrc} />}
+
       <div  className="flex flex-col  items-start  p-7 gap-x-5  h-full w-full">
         
         <div>

@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { CiBarcode } from "react-icons/ci";
 import * as motion from "framer-motion/client";
-import { FaFilePdf } from "react-icons/fa6";
+
 
 import DownloadPDFButton from "./buttonDownload";
 import Image from "next/image";
@@ -12,7 +12,7 @@ export default function PdfViewer({ date }) {
   const componentKey = JSON.stringify(date);
   const dados = date.filter(item => !removedIds.includes(item.id));
   const control = dados.length >= 6 ? 'overflow-auto' : 'overflow-hidden';
-  let teste = 'Fernando'
+  
   // Variantes para controlar a entrada e saída de cada item individualmente
   const variants = {
     hidden: { y: 100, opacity: 0 }, // Posição inicial
@@ -27,7 +27,7 @@ export default function PdfViewer({ date }) {
   return (
     <>
 
-    <div key={componentKey} onClick={() => console.log(dados)} className={`shadow-xl  gap-2 ${control} flex flex-col p-8 max-h-[90%] rounded-xl w-11/12`}>
+    <div key={componentKey}  className={`shadow-xl  gap-2 ${control} flex flex-col p-8 max-h-[90%] rounded-xl w-11/12`}>
     <div className={`${dados.length==0?'hidden':'visible'}`}>
       <DownloadPDFButton dados={dados} />
     </div>

@@ -6,9 +6,10 @@ export default function GerarCodigoBarrasSrc({ codigo, onGenerate }) {
     value: codigo,
     options: {
       background: '#ffffff',
-    width:1,
+    width:2,
     height:28,
     margin:0,
+    
       displayValue:false,
     },
   });

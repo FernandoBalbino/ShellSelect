@@ -14,6 +14,7 @@ const styles = StyleSheet.create({
   image: {
     width: '100%', // Ajuste para preencher o container e garantir alta qualidade
     paddingHorizontal: 15,
+    height:'70px', 
    paddingVertical:5,
   },
   itemContainer: {
