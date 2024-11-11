@@ -53,7 +53,7 @@ export default function AddCodigo(){
         
         <div>
           <h2 className="text-[#343537] text-2xl font-semibold mb-1">Sobre o seu produto:</h2>
-          <p className="mb-4 text-[#7f8792]">Escolha o tipo de código do seu produto abaixo:</p>
+          <p className="mb-4 text-[#7f8792]">Escolha o tipo de código do seu produto abaixo: teste</p>
           <div className="flex gap-3">
           
           <div onClick={() =>{
