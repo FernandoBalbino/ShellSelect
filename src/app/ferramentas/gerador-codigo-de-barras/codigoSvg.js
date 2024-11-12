@@ -9,7 +9,7 @@ export default function GerarCodigoBarras({ codigo, setUrlImagem }) {
       format:'codabar',
       background: '#ffffff',
       width: 2,
-      height: 28,
+      height: 25,
       margin: 0,
       displayValue: false,
     },
