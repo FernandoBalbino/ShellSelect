@@ -27,7 +27,7 @@ export default function PdfViewer({ date }) {
   return (
     <>
 
-    <div key={componentKey}  className={`shadow-xl  gap-2 ${control} flex flex-col p-8 max-h-[90%] rounded-xl w-11/12`}>
+    <div key={componentKey}  className={`shadow-xl  gap-2 ${control} flex flex-col p-8 md:max-h-[90%] rounded-xl w-11/12`}>
     <div className={`${dados.length==0?'hidden':'visible'}`}>
       <DownloadPDFButton dados={dados} />
     </div>
@@ -55,9 +55,9 @@ export default function PdfViewer({ date }) {
               exit="exit" // Animação de saída ao deletar
               variants={variants}
               transition={{ duration: 0.3 }}
-              className="flex items-center justify-between cursor-pointer px-3 rounded-lg hover:bg-[#E5E7EB] gap-2 h-auto w-full"
+              className="md:flex md:items-center md:justify-between cursor-pointer px-3 rounded-lg hover:bg-[#E5E7EB] gap-2 h-auto w-full"
             >
-              <div className="flex justify-center items-center gap-2">
+              <div className="flex md:justify-center items-center gap-2">
                 <div className="rounded-full p-2">
                   <CiBarcode color="black" size={50} />
                 </div>
@@ -69,7 +69,7 @@ export default function PdfViewer({ date }) {
               >
                 Deletar item
               </div>
-              <div className="font-bold text-[20px]">{item.codigo}</div>
+              <div className="font-bold text-center md:text-start  text-[20px]">{item.codigo}</div>
             </motion.div>
           </div>
         )

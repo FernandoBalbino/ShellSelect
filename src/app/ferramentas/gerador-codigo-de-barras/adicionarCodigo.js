@@ -71,12 +71,12 @@ export default function AddCodigo(){
   return(
     <>
      
-      <div  className="flex flex-col  items-start  p-7 gap-x-5  h-full w-full">
+      <div  className="md:flex flex-col  items-start  p-7 gap-x-5  md:h-full w-full">
         
         <div>
           <h2 className="text-[#343537] text-2xl font-semibold mb-1">Sobre o seu produto:</h2>
           <p className="mb-4 text-[#7f8792]">Escolha o tipo de código do seu produto abaixo</p>
-          <div className="flex gap-3">
+          <div className="md:flex gap-3">
           
           <div onClick={() =>{
             setSelecionado('0')
@@ -107,11 +107,11 @@ export default function AddCodigo(){
         <div className="flex w-full relative ">
           <div>
             <label htmlFor="nomeCodigo" className="text-[#343537] w-fit  cursor-pointer text-lg font-semibold my-2">Nome do produto</label>
-            <input placeholder="Produto..." ref={myRef1} autoFocus={true}  value={nome}  onChange={(e) => setNome(e.target.value)} className={`outline-[#E7E8E9] ${validacao && myRef1.current.value==''?'border-red-500 translate-x-3 ':''}  focus:border-[#171E43] w-[340px] block outline-0 transition-all border-2 px-3 py-2 rounded-md `} id="nomeCodigo" type="text" />
+            <input placeholder="Produto..." ref={myRef1} autoFocus={true}  value={nome}  onChange={(e) => setNome(e.target.value)} className={`outline-[#E7E8E9] ${validacao && myRef1.current.value==''?'border-red-500 translate-x-3 ':''}  focus:border-[#171E43] w-[90%] md:w-[340px] block outline-0 transition-all border-2 px-3 py-2 rounded-md `} id="nomeCodigo" type="text" />
             <label htmlFor="numeroCodigo" className="text-[#343537]  w-fit cursor-pointer text-lg font-semibold my-2">Número do código de barras</label>
             <input placeholder="859AAA498" ref={myRef2}  value={codigo} onChange={(e) => {
               setCodigo(e.target.value)
-            }} className={`outline-[#E7E8E9] ${validacao && myRef2.current.value==''?'border-red-500 translate-x-3 ':''} focus:border-[#171E43] w-[310px] block outline-0 border-2 transition-all px-3 py-2 rounded-md`}  id="numeroCodigo" type="number" />
+            }} className={`outline-[#E7E8E9] ${validacao && myRef2.current.value==''?'border-red-500 translate-x-3 ':''} focus:border-[#171E43] w-[90%] md:w-[310px] block outline-0 border-2 transition-all px-3 py-2 rounded-md`}  id="numeroCodigo" type="number" />
             </div>
             <div className={`w-full ${validacao?'visible':'hidden'} flex justify-center items-center`}>
              
@@ -135,7 +135,7 @@ export default function AddCodigo(){
        
           
       </div>
-          <div className="w-full flex justify-center items-center h-full">
+          <div className="w-full md:flex justify-center items-center h-full">
            <PdfViewer date={codigos} />
            
            

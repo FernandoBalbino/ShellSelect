@@ -21,7 +21,7 @@ export default function Ferramentas2() {
   return (
     <div>
       <CategoryFilter categories={categories} setCategory={setCategory} />
-      <div className='grid max-w-7xl mx-auto grid-cols-2 gap-y-6 gap-x-6 xl:grid-cols-4 justify-center justify-items-center items-center content-center center  p-9 '>
+      <div className='grid max-w-7xl mx-auto grid-cols-1 gap-y-6 gap-x-6 xl:grid-cols-4 justify-center justify-items-center items-center content-center center  p-9 '>
 
       
         {gg
@@ -36,7 +36,7 @@ export default function Ferramentas2() {
                 initial={{ opacity: 0, y: 60 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
-                className="rounded-xl flex flex-col overflow-hidden h-[270px] max-w-[18rem] max-h-[300px]"
+                className="rounded-xl flex flex-col overflow-hidden md:h-[270px] max-w-[18rem] md:max-h-[300px]"
               >
                 <Image
                   priority
