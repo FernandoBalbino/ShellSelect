@@ -47,7 +47,7 @@ export default function Footer(){
             </div>
                 
             <div>
-                <p className='italic text-[#0D0C22] font-medium leading-9 text-[17px]' > &copy;  2024 Fernando Kauã da Silva Balbino - Todos os direitos reservados © </p>
+                <p className='italic text-[#0D0C22] font-medium leading-9 text-[17px]' >  2024 Fernando Kauã da Silva Balbino - Todos os direitos reservados © </p>
 
                 </div>
             </div>
