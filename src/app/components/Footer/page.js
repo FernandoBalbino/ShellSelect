@@ -7,12 +7,12 @@ import Link from "next/link"
 export default function Footer(){
     return(
         <>
-        <footer className=' h-48 cursor-default	'>
-            <div className='max-w-[90rem] flex gap-10 items-center justify-between py-2 px-4 mx-auto'>
+        <footer className=' h-48  cursor-default	'>
+            <div className='max-w-[90rem] md:flex gap-10 md:items-center md:justify-between py-2 px-4 mx-auto'>
             
                 
                 
-                <div className="flex items-center justify-center gap-6">
+                <div className="md:flex  md:items-center md:justify-center md:gap-6">
                 <div>
                         <Image 
                             
@@ -26,20 +26,20 @@ export default function Footer(){
                     <nav 
                     
                     >
-                        <ul className="flex gap-10">
-                            <li
+                        <ul className="md:flex  gap-10">
+                            <li className=" mb-2 md:mb-0 "
                             
                             >
                             
                                 <Link href={'/ferramentas'}>Ferramentas</Link>
                             </li>
-                            <li>
+                            <li className="mb-2  md:mb-0">
                                 <Link href={'/sobre'}>Sobre</Link>
                             </li>
-                            <li>
+                            <li className="mb-2  md:mb-0">
                                 
                                   <Link  href={'/sobre'}>
-                                     Sobre 
+                                     Contato 
                                     </Link>
                             </li>
                         </ul>

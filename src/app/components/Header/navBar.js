@@ -25,9 +25,7 @@ export default function NavBar(){
             
                 <ul className='flex justify-center items-center gap-6 overflow-hidden'>
                     <li 
-                    initial={{ x:'100%'}}
-                    animate={{opacity:1, x:0}}
-                    transition={{duration: 1.2}}
+                    
                     
                     >
                         <Link className='tracking-normal hover:bg-slate-400 buttonS' href={'/ferramentas'}>
@@ -35,9 +33,7 @@ export default function NavBar(){
                         </Link>
                     </li>
                     <li
-                    initial={{ y:'-500%'}}
-                    animate={{opacity:1, y:0}}
-                    transition={{duration: 1, delay:0.2}}
+                    
                     >
                         
                         <Link className='tracking-normal buttonS' href={'/sobre'}>

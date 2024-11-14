@@ -17,7 +17,7 @@ import GerarCodigoBarras from "./codigoSvg";
 
 export default function AddCodigo(){
 
-
+  
   const [codigos, setCodigos] = useState([])
   const myRef1 = useRef(null)
   const myRef2 = useRef(null)

@@ -2,6 +2,7 @@ import { Plus_Jakarta_Sans } from "next/font/google";
 import "./styles/globals.css";
 import Header from "./components/Header/page";
 import Footer from "./components/Footer/page";
+import PixCard from "./pixCard";
 const inter = Plus_Jakarta_Sans({ 
   subsets:["latin"],
   weight:["400"]
@@ -16,7 +17,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="pt-br">
       <body className={inter.className}>
-        
+        <PixCard />
         <Header />
         <main className="cursor-default">
           {children}
